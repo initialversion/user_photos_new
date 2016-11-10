@@ -26,7 +26,13 @@
 
       <% @photos.each do |photo| %>
       <tr>
-        <td><%= photo.user.email %></td>
+        <td>
+          <% if photo.user.present? %>
+            <a href="/users/<%= photo.user.id %>">
+              <%= photo.user.email %>
+            </a>
+          <% end %>
+        </td>
         <td><%= photo.caption %></td>
         <td><%= photo.location %></td>
         <td>
