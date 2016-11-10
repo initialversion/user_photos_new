@@ -5,9 +5,6 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Email</dt>
-      <dd><%= @user.email %></dd>
-
       <dt>Password</dt>
       <dd><%= @user.password %></dd>
 
@@ -19,6 +16,12 @@
     <div class="btn-group btn-group-justified">
       <a href="/users" class="btn btn-primary">
         Back
+      </a>
+      <a href="/users/<%= @user.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_user/<%= @user.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
       </a>
     </div>
   </div>
@@ -42,17 +45,47 @@
             <a href="/photos/<%= photo.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <%if current_user == photo.user %>
-              <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_photo" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= @user.id %>">
+
+      <!-- Label and input for caption -->
+      <div class="form-group">
+        <label for="caption" class="control-label">
+          Caption
+        </label>
+
+        <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for location -->
+      <div class="form-group">
+        <label for="location" class="control-label">
+          Location
+        </label>
+
+        <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Photo
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>

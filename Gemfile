@@ -47,7 +47,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'devise'
 gem 'starter_generators', :git => 'https://github.com/raghubetina/starter_generators.git'
 gem 'font-awesome-sass', '~> 4.5.0'
 gem 'activeadmin', '~> 1.0.0.pre4'

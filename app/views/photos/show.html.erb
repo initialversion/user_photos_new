@@ -9,7 +9,7 @@
       <dd>
         <% if @photo.user.present? %>
           <a href="/users/<%= @photo.user_id %>">
-            <%= @photo.user.email %>
+            <%= @photo.user.created_at %>
           </a>
         <% end %>
       </dd>
@@ -30,14 +30,12 @@
       <a href="/photos" class="btn btn-primary">
         Back
       </a>
-      <% if current_user == @photo.user %>
-        <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
+      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
     </div>
   </div>
 </div>
