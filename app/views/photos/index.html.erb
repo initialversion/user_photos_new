@@ -3,6 +3,71 @@
     Photos
     <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
   </h1>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => "collapse", :id => "photos_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
+
+        <div class="form-group">
+    <%= f.label :caption_cont, "Caption contains" %>
+    <%= f.text_field :caption_cont, :class => "form-control", :placeholder => "Caption contains" %>
+  </div>
+
+<div class="form-group">
+      <%= f.label :created_at, "Created at" %>
+    </div>
+      <div class="form-group">
+          <div class="row">
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:ss'
+              });
+              $('#created_atlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:ss'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+        <div class="form-group">
+      <%= f.label :user_email_cont, "User email contains" %>
+      <%= f.text_field :user_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block" %>
+
+      <a href="/photos" class="btn btn-default btn-block">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#photos_filters">
+      Show Filters
+    </a>
+  </div>
 </div>
 
 
